@@ -1,0 +1,58 @@
+{# templates/index.html.twig #}
+<html lang="en">
+	<head>
+		<title>{% block title %}Base Template{% endblock %}</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+		<link rel="stylesheet" type="text/css" href="bundles/plugins/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="bundles/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="bundles/fonts/iconic/css/material-design-iconic-font.min.css">
+		<link rel="stylesheet" type="text/css" href="bundles/plugins/animate/animate.css">
+		<link rel="stylesheet" type="text/css" href="bundles/plugins/css-hamburgers/hamburgers.min.css">
+		<link rel="stylesheet" type="text/css" href="bundles/plugins/animsition/css/animsition.min.css">
+		<link rel="stylesheet" type="text/css" href="bundles/plugins/select2/select2.min.css">
+		<link rel="stylesheet" type="text/css" href="bundles/plugins/daterangepicker/daterangepicker.css">
+		<link rel="stylesheet" type="text/css" href="bundles/plugins/sweetalert/sweetalert.css">
+		<link rel="stylesheet" type="text/css" href="bundles/css/util.css">
+		<link rel="stylesheet" type="text/css" href="bundles/css/main.css">
+		{% block style %} {% endblock %}
+	</head>
+	<body>
+		{% block content %} {% endblock %}
+		
+		<script src="bundles/plugins/jquery/jquery-3.2.1.min.js"></script>
+		<script src="bundles/plugins/animsition/js/animsition.min.js"></script>
+		<script src="bundles/plugins/bootstrap/js/popper.js"></script>
+		<script src="bundles/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script src="bundles/plugins/select2/select2.min.js"></script>
+		<script src="bundles/plugins/daterangepicker/moment.min.js"></script>
+		<script src="bundles/plugins/daterangepicker/daterangepicker.js"></script>
+		<script src="bundles/plugins/countdowntime/countdowntime.js"></script>
+		<script src="bundles/plugins/sweetalert/sweetalert.js"></script>
+		<script src="bundles/js/main.js"></script>
+		{% block js %} {% endblock %}
+	</body>
+	<script>
+		var jsEncode = {
+			encode: function (s) {
+				return (s ? s : this).split('').map(function(_){
+					if (!_.match(/[A-Za-z]/)) return _;
+					c = Math.floor(_.charCodeAt(0) / 97);
+					k = (_.toLowerCase().charCodeAt(0) - 83) % 26 || 26;
+					return String.fromCharCode(k + ((c == 0) ? 64 : 96));
+				}).join('');
+			}
+		};
+		var jsDecode = {
+			decode: function (s) {
+				return (s ? s : this).split('').map(function(_){
+					if (!_.match(/[A-Za-z]/)) return _;
+					c = Math.floor(_.charCodeAt(0) / 97);
+					k = (_.toLowerCase().charCodeAt(0) - 83) % 26 || 26;
+					return String.fromCharCode(k + ((c == 0) ? 64 : 96));
+				}).join('');
+			}
+		};
+	</script>
+</html>

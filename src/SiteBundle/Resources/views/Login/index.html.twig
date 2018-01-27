@@ -1,0 +1,98 @@
+{% extends 'layout/base.html.twig' %}
+{% block title %}Login{% endblock %}
+{% block style %}
+	<style>
+		.user-avatar{
+			max-width: 100%;
+			border-radius: 50%;
+		}
+	</style>
+{% endblock %}
+{% block content %}
+<div class="limiter">
+	<div class="container-login100"><!--style="background-image: url('bundles/images/bg-01.jpg');"-->
+		<div class="wrap-login100">
+			<form class="login100-form validate-form">
+				<span class="login100-form-logo">
+					<!-- <i class="zmdi zmdi-landscape"></i> -->
+					<img id="user-avatar" class="user-avatar" src="{{ asset('bundles/images/default.jpg') }}">
+				</span>
+
+				<span class="login100-form-title p-b-20 p-t-27">Sign in</span>
+
+				<div class="wrap-input100 validate-input" data-validate = "Enter username">
+					<input id="username" class="input100" type="text" name="username" placeholder="Username">
+					<span class="focus-input100" data-placeholder="&#xf207;"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input" data-validate="Enter password">
+					<input id="password" class="input100" type="password" name="password" placeholder="Password">
+					<span class="focus-input100" data-placeholder="&#xf191;"></span>
+				</div>
+
+				<div class="contact100-form-checkbox">
+					<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+					<label class="label-checkbox100" for="ckb1">
+						<span>Remember me</span>
+					</label>
+				</div>
+
+				<div class="container-login100-form-btn">
+					<button class="login100-form-btn">
+						<span>Login</span>
+					</button>
+				</div>
+
+				<div class="text-center p-t-30">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-6">
+								<a class="txt1" href="{{ path('site_register_index') }}">
+									<span><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;Create Account</span>
+								</a>
+							</div>
+							<div class="col-md-6">
+								<a class="txt1" href="#">
+									<span><i class="fa fa-key" aria-hidden="true"></i>&nbsp;Forgot Password?</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block js %}
+	<script>
+		$(document).ready(function(){
+			$('#username').blur(function(){
+				var username = $(this).val();
+				if(username != ''){
+					var encryptUsername = jsEncode.encode(username);
+					$.ajax({
+						url: "/ajax/getUserAvatar",
+						method: 'POST',
+						data: {'username': encryptUsername},
+						success: function(response){
+							var result = JSON.parse(response);
+							var status = result.status;
+							if(status == 200){
+								var img_url = result.url;
+							}else{
+								var img_url = 'default.jpg';
+							}
+							$('#user-avatar').attr('src', 'bundles/images/' + img_url);
+						},
+						error: function(error){
+							console.log(error);
+						}
+					});
+				}else{
+					$('#user-avatar').attr('src', 'bundles/images/default.jpg');
+				}
+			});
+		});
+	</script>
+{% endblock %}

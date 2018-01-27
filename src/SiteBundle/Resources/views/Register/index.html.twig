@@ -1,0 +1,140 @@
+{% extends 'layout/base.html.twig' %}
+{% block title %}Create Account{% endblock %}
+{% block style %}
+<style>
+	select option{
+		margin:40px;
+		background: #9a45f5;
+		color:#fff;
+		text-shadow:0 1px 0 rgba(0,0,0,0.4);
+	}
+</style>
+{% endblock %}
+{% block content %}
+<div class="limiter">
+	<div class="container-login100"> <!--style="background-image: url('bundles/images/bg-01.jpg');"-->
+		<div class="wrap-login100">
+			<form id="register-form" class="login100-form validate-form" action="{{ path('site_register_save') }}" method="post" enctype="multipart/form-data">
+				
+				<span class="login100-form-title p-b-20">Create Account</span>
+				
+				<div class="wrap-input100 validate-input" data-validate = "Enter Firstname">
+					<input id="firstname" class="reg-input100" type="text" name="firstname" placeholder="Firstname">
+					<span class="focus-input100"></span>
+				</div>
+				
+				<div class="wrap-input100 validate-input" data-validate = "Enter Lastname">
+					<input id="lastname" class="reg-input100" type="text" name="lastname" placeholder="Lastname">
+					<span class="focus-input100"></span>
+				</div>
+				
+				<div class="wrap-input100 validate-input" data-validate = "Enter Email">
+					<input id="email" class="reg-input100" type="email" name="email" placeholder="Email">
+					<span class="focus-input100"></span>
+				</div>
+				
+				<div class="wrap-input100 validate-input" data-validate = "Enter username">
+					<input id="username" class="reg-input100" type="text" name="username" placeholder="Username">
+					<span class="focus-input100"></span>
+				</div>
+				
+				<div class="wrap-input100 validate-input" data-validate="Enter password">
+					<input id="password" class="reg-input100" type="password" name="password" placeholder="Password">
+					<span class="focus-input100"></span>
+				</div>
+				
+				<div class="wrap-input100 validate-input" data-validate="Re-Enter password">
+					<input id="cnf-password" class="reg-input100" type="password" name="cnf-password" placeholder="Confirm Password">
+					<span class="focus-input100"></span>
+				</div>
+				
+				<div class="wrap-input100">
+					<input id="img_url" class="reg-input100" type="file" name="img_url">
+					<span class="focus-input100"></span>
+				</div>
+				
+				<div class="wrap-input100 validate-input" data-validate = "Enter Age">
+					<input id="age" class="reg-input100" type="text" name="age" placeholder="Age">
+					<span class="focus-input100"></span>
+				</div>
+				
+				<div class="wrap-input100" data-validate = "Enter Gender">
+					<select id="gender" class="reg-input100" name="gender">
+						<option>Select gender</option>
+						<option value="1">Male</option>
+						<option value="0">Female</option>
+					</select>
+				</div>
+				
+				<div class="wrap-input100 validate-input" data-validate = "Enter Contact">
+					<input id="contact" class="reg-input100" type="text" name="contact" placeholder="Contact">
+					<span class="focus-input100"></span>
+				</div>
+				
+				<div class="wrap-input100 validate-input" data-validate = "Enter Address">
+					<input id="address" class="reg-input100" type="text" name="address" placeholder="Address">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="container-login100-form-btn">
+					<button type="submit" class="login100-form-btn">
+						<span>Create Account</span>
+					</button>
+				</div>
+				
+			</form>
+			
+			<div class="text-center p-t-30">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-6">
+								<a class="txt1" href="">
+									<span><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Sign in</span>
+								</a>
+							</div>
+							<div class="col-md-6">
+								<a class="txt1" href="#">
+									<span><i class="fa fa-key" aria-hidden="true"></i>&nbsp;Forgot Password?</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block js %}
+	<script>
+		$(document).ready(function(){
+			$('#username').blur(function(){
+				var username = $(this).val();
+				if(username != ''){
+					var encryptUsername = jsEncode.encode(username);
+					$.ajax({
+						url: "/ajax/isUniqueUsername",
+						method: 'POST',
+						data: {'username': encryptUsername},
+						success: function(response){
+							var result = JSON.parse(response);
+							var status = result.status;
+							if(status == 100){
+								swal('', "Username already exists", "error");
+								$('#register-form').submit(function(e){
+									e.priventDefault();
+								});
+								$('#username').val('');
+								$('#username').focus();
+							}
+							$('#user-avatar').attr('src', 'bundles/images/' + img_url);
+						},
+						error: function(error){
+							console.log(error);
+						}
+					});
+				}
+			});
+		});
+	</script>
+{% endblock %}

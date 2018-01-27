@@ -1,0 +1,78 @@
+<html lang="en">
+	<head>
+		<title>{% block title %}Base Template{% endblock %}</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+		<link rel="stylesheet" type="text/css" href="bundles/plugins/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="bundles/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="bundles/fonts/iconic/css/material-design-iconic-font.min.css">
+		<link rel="stylesheet" type="text/css" href="bundles/plugins/animate/animate.css">
+		<link rel="stylesheet" type="text/css" href="bundles/plugins/css-hamburgers/hamburgers.min.css">
+		<link rel="stylesheet" type="text/css" href="bundles/plugins/animsition/css/animsition.min.css">
+		<link rel="stylesheet" type="text/css" href="bundles/plugins/select2/select2.min.css">
+		<link rel="stylesheet" type="text/css" href="bundles/plugins/daterangepicker/daterangepicker.css">
+		<link rel="stylesheet" type="text/css" href="bundles/css/util.css">
+		<link rel="stylesheet" type="text/css" href="bundles/css/main.css">
+		{% block style %} {% endblock %}
+	</head>
+	<body>
+		{% block content %}
+		<div class="limiter">
+			<div class="container-login100" style="background-image: url('bundles/images/bg-01.jpg');">
+				<div class="wrap-login100">
+					<form class="login100-form validate-form">
+						<span class="login100-form-logo">
+							<i class="zmdi zmdi-landscape"></i>
+						</span>
+
+						<span class="login100-form-title p-b-20 p-t-27">
+							Log in
+						</span>
+
+						<div class="wrap-input100 validate-input" data-validate = "Enter username">
+							<input class="input100" type="text" name="username" placeholder="Username">
+							<span class="focus-input100" data-placeholder="&#xf207;"></span>
+						</div>
+
+						<div class="wrap-input100 validate-input" data-validate="Enter password">
+							<input class="input100" type="password" name="pass" placeholder="Password">
+							<span class="focus-input100" data-placeholder="&#xf191;"></span>
+						</div>
+
+						<div class="contact100-form-checkbox">
+							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+							<label class="label-checkbox100" for="ckb1">
+								Remember me
+							</label>
+						</div>
+
+						<div class="container-login100-form-btn">
+							<button class="login100-form-btn">
+								Login
+							</button>
+						</div>
+
+						<div class="text-center p-t-30">
+							<a class="txt1" href="#">
+								Forgot Password?
+							</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		{% endblock %}
+		
+		<script src="bundles/plugins/jquery/jquery-3.2.1.min.js"></script>
+		<script src="bundles/plugins/animsition/js/animsition.min.js"></script>
+		<script src="bundles/plugins/bootstrap/js/popper.js"></script>
+		<script src="bundles/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script src="bundles/plugins/select2/select2.min.js"></script>
+		<script src="bundles/plugins/daterangepicker/moment.min.js"></script>
+		<script src="bundles/plugins/daterangepicker/daterangepicker.js"></script>
+		<script src="bundles/plugins/countdowntime/countdowntime.js"></script>
+		<script src="bundles/js/main.js"></script>
+		{% block js %} {% endblock %}
+	</body>
+</html>
